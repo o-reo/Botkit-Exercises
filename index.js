@@ -1,5 +1,8 @@
 /**
  * Quote API
+ * Creates an API that returns a random quote on /quote
+ * or returns a random quote matching a bag of words
+ * Returns the list of available keywords on /quote/keywords
  */
 
 const express = require('express');
@@ -11,27 +14,36 @@ const app = express();
 const quotes = JSON.parse(fs.readFileSync('assets/quotes.json').toString());
 
 /**
- * Returns the quotes matching the keyword specified
- * @param {String} keyword
+ * Returns every keyword found in quotes with no duplicates
  * @returns {Array}
  */
-function quoteMatch(keyword) {
-  let matches = [];
-  let lower = keyword.toLowerCase();
-  quotes.forEach((quote) => {
-      // Goes through the keywords to get if there is a match
-    for (let kw of quote['keywords']) {
-      if (lower === kw.toLowerCase()) {
-        matches.push(quote['quote']);
-        break;
-      }
-    }
-  });
-  return matches;
+function getKeywords() {
+    let keywords = [];
+    quotes.forEach((el) => {
+        keywords = keywords.concat(el['keywords']);
+    });
+    return keywords.filter((item, pos) => {return keywords.indexOf(item) === pos});
 }
 
 /**
- * Creates a route that returns a random quote or a random quote matching the specified keyword
+ * Returns an array of quotes matching the keywords that are in a bag of words
+ * @param {String} wordBag
+ * @returns {Array}
+ */
+function quoteMatch(wordBag) {
+  let matches = [];
+  let intersect = [];
+  // const intersect = keywords.filter(el => wordBag.indexOf(el.toLowerCase()) !== -1);
+    quotes.forEach(quote => {
+        intersect = quote['keywords'].filter(el => wordBag.indexOf(el.toLowerCase()) !== -1);
+        if (intersect.length > 0)
+            matches.push(quote['quote']);
+    });
+    return matches;
+}
+
+/**
+ * Creates a route that returns a random quote or a random quote matching the bag of words
  * returns the quote matching the sentence passed as a query parameter
  */
 app.get('/quote', (req, res) => {
@@ -51,15 +63,10 @@ app.get('/quote', (req, res) => {
 });
 
 /**
- * Creates a route that returns the array of all keywords with no duplicates
+ * Creates a route that returns the array of all keywords
  */
 app.get('/quote/keywords', (req, res) => {
-    let keywords = [];
-    quotes.forEach((el) => {
-        keywords = keywords.concat(el['keywords']);
-    });
-    keywords = keywords.filter((item, pos) => {return keywords.indexOf(item) === pos});
-    res.send(keywords);
+    res.send(getKeywords());
 });
 
 app.listen(port, () => {

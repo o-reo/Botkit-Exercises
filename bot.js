@@ -46,13 +46,10 @@ axios.get('http://localhost:3000/quote/keywords')
                 // Converts to a bag of words
                 const wordBag = normMessage.split(' ');
 
-                // Matches the bag of words to the keywords
-                const intersect = keywords.filter(el => wordBag.indexOf(el.toLowerCase()) !== -1);
-
                 // Request from the API
                 axios.get('http://localhost:3000/quote', {
                     params: {
-                        keyword: intersect.toString()
+                        keyword: wordBag.toString()
                     }
                 })
                     .then((response) => {
