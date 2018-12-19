@@ -1,11 +1,12 @@
 /**
- *  Bot Controller
+ *  A Bot with console input that calls the API to return quotes matching
+ *  specific keywords
  */
 const botkit = require('botkit');
 const axios = require('axios');
 
 /**
- * Creates a bot and opens the console input
+ * Creates the bot using Botkit and opens the console input
  * @type {botkit.ConsoleController}
  */
 const controller = botkit.consolebot({
