@@ -46,8 +46,8 @@ function quoteMatch(wordBag) {
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~ ROUTES ~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
 /**
- * Creates a route that returns a random quote or a random quote matching the bag of words
- * returns the quote matching the sentence passed as a query parameter
+ * Creates a route that returns a random quote
+ *  or a every quotes matching the bag of words sent as a query parameter
  */
 app.get('/quote', (req, res) => {
   if (req.query['keyword']) {

@@ -7,7 +7,6 @@ const axios = require('axios');
 
 /**
  * Creates the bot using Botkit and opens the console input
- * @type {botkit.ConsoleController}
  */
 const controller = botkit.consolebot({
     debug: false
