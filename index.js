@@ -13,7 +13,7 @@ const app = express();
 
 const quotes = JSON.parse(fs.readFileSync('assets/quotes.json').toString());
 
-/* ~~~~~~~~~~~~~~~~~~~~~~~~~~ UTILS ~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ UTILS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
 /**
  * Returns every keyword found in quotes with no duplicates
@@ -43,7 +43,7 @@ function quoteMatch(wordBag) {
     return matches;
 }
 
-/* ~~~~~~~~~~~~~~~~~~~~~~~~~~ ROUTES ~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ROUTES ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
 /**
  * Creates a route that returns a random quote
