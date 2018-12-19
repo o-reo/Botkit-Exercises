@@ -37,7 +37,7 @@ function quoteMatch(wordBag) {
     quotes.forEach(quote => {
         intersect = quote['keywords'].filter(el => wordBag.indexOf(el.toLowerCase()) !== -1);
         if (intersect.length > 0)
-            matches.push(quote['quote']);
+            matches.push(quote);
     });
     return matches;
 }
@@ -51,14 +51,14 @@ app.get('/quote', (req, res) => {
     let matches = quoteMatch(req.query['keyword']);
     if (matches.length > 0) {
         // There is at least a match so it returns a random quote from matches
-      res.status(200).send(matches[Math.floor(Math.random() * matches.length)]);
+      res.status(200).send(matches);
     } else {
         // There is not match so it returns nothing
       res.status(204).end();
     }
   } else {
     const quote = quotes[Math.floor(Math.random() * quotes.length)];
-    res.status(200).send(quote['quote']);
+    res.status(200).send(quote);
   }
 });
 

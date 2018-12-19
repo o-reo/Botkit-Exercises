@@ -56,7 +56,9 @@ axios.get('http://localhost:3000/quote/keywords')
                         if (response.status === 200)
 
                         // A quote was found
-                            bot.reply(message, response.data);
+                            response.data.forEach((quote) => {
+                                bot.reply(message, quote['quote']);
+                            });
                         else {
 
                             // No quote was found
