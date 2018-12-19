@@ -14,7 +14,8 @@ La solution proposée est dans le fichier `index.js`
 \- Répondre correctement à au revoir pour être poli \
 \- Répondre avec une citation si un des mots-clés de la citation est présent dans la phrase utilisateur 
 
-La solution proposée est dans le fichier `bot.js`
+La solution proposée est dans le fichier `bot.js`. \
+Si les keywords correspondant à plusieurs citations sont données elles sont toutes retournées.
 
 ## Exercice 3
 > Pourquoi utiliser un Linter ? Quel est le linter le plus connu pour Javascript
