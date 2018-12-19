@@ -1,7 +1,7 @@
 /**
  * Quote API
  * Creates an API that returns a random quote on /quote
- * or returns a random quote matching a bag of words
+ * or returns every quotes matching a bag of words
  * Returns the list of available keywords on /quote/keywords
  */
 
@@ -12,6 +12,8 @@ const port = 3000;
 const app = express();
 
 const quotes = JSON.parse(fs.readFileSync('assets/quotes.json').toString());
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~ UTILS ~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
 /**
  * Returns every keyword found in quotes with no duplicates
@@ -33,7 +35,6 @@ function getKeywords() {
 function quoteMatch(wordBag) {
   let matches = [];
   let intersect = [];
-  // const intersect = keywords.filter(el => wordBag.indexOf(el.toLowerCase()) !== -1);
     quotes.forEach(quote => {
         intersect = quote['keywords'].filter(el => wordBag.indexOf(el.toLowerCase()) !== -1);
         if (intersect.length > 0)
@@ -41,6 +42,8 @@ function quoteMatch(wordBag) {
     });
     return matches;
 }
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~ ROUTES ~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
 /**
  * Creates a route that returns a random quote or a random quote matching the bag of words
